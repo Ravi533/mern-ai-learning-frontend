@@ -4,6 +4,9 @@ import "../../src/App.css"
 import { useSelector } from "react-redux";
 
 function AiAssistant() {
+
+ const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5001/api";
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -87,7 +90,7 @@ const handlePdfUpload = async (event) => {
       formData.append("pdf", pdfFile);
   
       const response = await fetch(
-        "http://localhost:5001/api/pdf/upload",
+      `${API_BASE_URL}/pdf/upload`,
         {
           method: "POST",
           body: formData,
@@ -136,7 +139,7 @@ const handleSendMessage = async (event) => {
   
     try {
       const response = await fetch(
-        "http://localhost:5001/api/pdf/ask",
+     `${API_BASE_URL}/pdf/ask`,
         {
           method: "POST",
           headers: {
